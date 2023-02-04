@@ -25,7 +25,6 @@ export const Button = ({
       className={cn(style.btn, className, {
         [style.disabled]: disabled,
       })}
-      // onClick={() => onClick?.()}
       onClick={onClick}
     >
       {children}

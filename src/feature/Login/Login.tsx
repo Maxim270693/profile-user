@@ -11,13 +11,15 @@ import { Spinner } from "../../components/Spinner";
 import UserIcon from "../../image/user.svg";
 import PasswordIcon from "../../image/password.svg";
 
-import { useAppSelector } from "../../types/types";
+import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Login.module.scss";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const isLoading = useAppSelector<boolean>((state) => state.common.isLoading);
-  const isLogin = useAppSelector<boolean>((state) => state.login.isLogin);
+  const loginUser = useAppSelector<UserResponse | null>(
+    (state) => state.login.loginUser
+  );
   const isError = useAppSelector<boolean | null>(
     (state) => state.common.isError
   );
@@ -45,10 +47,10 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (!isError && isLogin) {
+    if (!isError && loginUser) {
       navigate("/");
     }
-  }, [isLogin]);
+  }, [loginUser]);
 
   return (
     <div>
