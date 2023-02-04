@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F3F3F3;
+  height: 100vh;
+
+  .formRegister {
+    background-color: #fff;
+    padding: 30px;
+
+    h1 {
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 140%;
+      margin-bottom: 25px;
+    }
+
+    .createAccount {
+      margin-top: 15px;
+    }
+  }
+}
