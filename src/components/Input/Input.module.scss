@@ -8,12 +8,15 @@
     background-color: #ffffff;
     width: 330px;
     padding: 12px 20px 12px 55px;
+
+    font-size: 16px;
+    line-height: 160%;
   }
 
   .img {
     position: absolute;
     left: 18px;
-    top: 7px;
+    top: 12px;
   }
 
   .eyeIcon {
@@ -21,7 +24,7 @@
     height: 25px;
     position: absolute;
     right: 15px;
-    top: 7px;
+    top: 12px;
     cursor: pointer;
   }
 }
