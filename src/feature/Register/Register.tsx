@@ -60,7 +60,7 @@ export const Register = () => {
           eyeCloseIcon={true}
         />
 
-        <Button>Создать аккаунт</Button>
+        <Button disabled={true}>Создать аккаунт</Button>
       </form>
     </div>
   );
