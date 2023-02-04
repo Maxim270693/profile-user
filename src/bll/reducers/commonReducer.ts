@@ -1,4 +1,4 @@
-import { ActionTypeCommon } from "../../types/types";
+import { ActionTypeCommon, InitialStateCommonType } from "../../types/types";
 import { IS_LOADING } from "../../constants/constants";
 
 export const initialStateCommon = {
@@ -8,7 +8,7 @@ export const initialStateCommon = {
 export const commonReducer = (
   state = initialStateCommon,
   action: ActionTypeCommon
-) => {
+): InitialStateCommonType => {
   switch (action.type) {
     case IS_LOADING:
       return { ...state, isLoading: action.payload };

@@ -1,8 +1,12 @@
 import { rootReducer } from "../bll/store/store";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { initialStateCommon } from "../bll/reducers/commonReducer";
 
 // type Store
 export type RootStateType = ReturnType<typeof rootReducer>;
+
+// type InitialStateCommon
+export type InitialStateCommonType = typeof initialStateCommon;
 
 // type ActionsCommon
 export type ActionTypeCommon = any;

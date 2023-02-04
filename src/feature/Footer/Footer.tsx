@@ -4,7 +4,8 @@ export const Footer = () => {
   return (
     <div className={style.wrapper}>
       <p className={style.text}>
-        Уже есть аккаунт? <span className={style.textItem}>Войти</span>
+        Еще нет аккаунта?{" "}
+        <span className={style.textItem}>Зарегистрироваться</span>
       </p>
     </div>
   );

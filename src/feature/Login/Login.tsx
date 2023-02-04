@@ -1,15 +1,16 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { authLoginTC } from "../../bll/thunks/thunks";
 
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { Spinner } from "../../components/Spinner";
 
 import UserIcon from "../../image/user.svg";
 import PasswordIcon from "../../image/password.svg";
 
-import style from "./Login.module.scss";
-import { useDispatch } from "react-redux";
-import { authLoginTC } from "../../bll/thunks/thunks";
 import { useAppSelector } from "../../types/types";
+import style from "./Login.module.scss";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -37,36 +38,40 @@ export const Login = () => {
 
   return (
     <div className={style.wrapper}>
-      <form onSubmit={handleSubmit} className={style.formRegister}>
-        <h1>Вход в Yoldi Agency</h1>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <form onSubmit={handleSubmit} className={style.formRegister}>
+          <h1>Вход в Yoldi Agency</h1>
 
-        <Input
-          type="text"
-          placeholder="Имя"
-          value={email}
-          name="username"
-          onChange={onChangeHandler}
-          image={UserIcon}
-        />
-        <Input
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          name="password"
-          onChange={onChangeHandler}
-          image={PasswordIcon}
-          eyeIcon={true}
-          eyeCloseIcon={true}
-        />
+          <Input
+            type="text"
+            placeholder="Имя"
+            value={email}
+            name="username"
+            onChange={onChangeHandler}
+            image={UserIcon}
+          />
+          <Input
+            type="password"
+            placeholder="Пароль"
+            value={password}
+            name="password"
+            onChange={onChangeHandler}
+            image={PasswordIcon}
+            eyeIcon={true}
+            eyeCloseIcon={true}
+          />
 
-        <Button
-          type="submit"
-          className={style.createAccount}
-          onClick={() => setFormData(formData)}
-        >
-          Войти
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            className={style.createAccount}
+            onClick={() => setFormData(formData)}
+          >
+            Войти
+          </Button>
+        </form>
+      )}
     </div>
   );
 };
