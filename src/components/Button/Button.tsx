@@ -4,18 +4,29 @@ import style from "./Button.module.scss";
 import cn from "classnames";
 
 interface IButtonProps {
+  type?: "button" | "submit" | "reset";
   children: ReactNode;
   className?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
-export const Button = ({ children, className, disabled }: IButtonProps) => {
+export const Button = ({
+  type,
+  children,
+  className,
+  disabled,
+  onClick,
+}: IButtonProps) => {
   return (
     <button
+      type={type}
       disabled={disabled}
       className={cn(style.btn, className, {
         [style.disabled]: disabled,
       })}
+      // onClick={() => onClick?.()}
+      onClick={onClick}
     >
       {children}
     </button>

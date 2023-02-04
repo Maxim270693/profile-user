@@ -25,7 +25,7 @@ export const Input = ({
   image,
   eyeIcon,
 }: IInputProps) => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(true);
 
   const renderEyeIcon = (
     <img
