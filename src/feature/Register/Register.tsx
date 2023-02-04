@@ -60,7 +60,9 @@ export const Register = () => {
           eyeCloseIcon={true}
         />
 
-        <Button disabled={true}>Создать аккаунт</Button>
+        <Button className={style.createAccount} disabled={true}>
+          Создать аккаунт
+        </Button>
       </form>
     </div>
   );

@@ -8,6 +8,7 @@
   .formRegister {
     background-color: #fff;
     padding: 30px;
+    border-radius: 5px;
 
     h1 {
       font-weight: 500;
@@ -19,5 +20,9 @@
     .createAccount {
       margin-top: 15px;
     }
+  }
+
+  @media screen and (max-width: 515px) {
+    background-color: inherit;
   }
 }

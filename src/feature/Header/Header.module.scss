@@ -15,6 +15,14 @@
     .text {
       max-width: 225px;
       line-height: 26px;
+
+      @media screen and (max-width: 515px) {
+        display: none;
+      }
     }
+  }
+
+  @media screen and (max-width: 515px) {
+    border-bottom: 1px solid #E6E6E6;
   }
 }

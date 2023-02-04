@@ -9,15 +9,11 @@ interface IButtonProps {
   disabled?: boolean;
 }
 
-export const Button = ({
-  children,
-  className,
-  disabled,
-}: IButtonProps) => {
+export const Button = ({ children, className, disabled }: IButtonProps) => {
   return (
     <button
       disabled={disabled}
-      className={cn(style.btn, {
+      className={cn(style.btn, className, {
         [style.disabled]: disabled,
       })}
     >
