@@ -1,9 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authLoginTC } from "../../bll/thunks/thunks";
+import { useNavigate } from "react-router-dom";
 
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { Footer } from "../Footer";
 import { Spinner } from "../../components/Spinner";
 
 import UserIcon from "../../image/user.svg";
@@ -15,6 +17,12 @@ import style from "./Login.module.scss";
 export const Login = () => {
   const dispatch = useDispatch();
   const isLoading = useAppSelector<boolean>((state) => state.common.isLoading);
+  const isLogin = useAppSelector<boolean>((state) => state.login.isLogin);
+  const isError = useAppSelector<boolean | null>(
+    (state) => state.common.isError
+  );
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "superman@gmail.com",
@@ -36,42 +44,51 @@ export const Login = () => {
     dispatch(authLoginTC(formData));
   };
 
+  useEffect(() => {
+    if (!isError && isLogin) {
+      navigate("/");
+    }
+  }, [isLogin]);
+
   return (
-    <div className={style.wrapper}>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <form onSubmit={handleSubmit} className={style.formRegister}>
-          <h1>Вход в Yoldi Agency</h1>
+    <div>
+      <div className={style.wrapper}>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <form onSubmit={handleSubmit} className={style.formRegister}>
+            <h1>Вход в Yoldi Agency</h1>
 
-          <Input
-            type="text"
-            placeholder="Имя"
-            value={email}
-            name="username"
-            onChange={onChangeHandler}
-            image={UserIcon}
-          />
-          <Input
-            type="password"
-            placeholder="Пароль"
-            value={password}
-            name="password"
-            onChange={onChangeHandler}
-            image={PasswordIcon}
-            eyeIcon={true}
-            eyeCloseIcon={true}
-          />
+            <Input
+              type="text"
+              placeholder="Имя"
+              value={email}
+              name="email"
+              onChange={onChangeHandler}
+              image={UserIcon}
+            />
+            <Input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              name="password"
+              onChange={onChangeHandler}
+              image={PasswordIcon}
+              eyeIcon={true}
+              eyeCloseIcon={true}
+            />
 
-          <Button
-            type="submit"
-            className={style.createAccount}
-            onClick={() => setFormData(formData)}
-          >
-            Войти
-          </Button>
-        </form>
-      )}
+            <Button
+              type="submit"
+              className={style.createAccount}
+              onClick={() => setFormData(formData)}
+            >
+              Войти
+            </Button>
+          </form>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 };
