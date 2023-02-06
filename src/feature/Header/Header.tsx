@@ -3,6 +3,7 @@ import { useAppSelector, UserResponse } from "../../types/types";
 import logo from "../../image/logo.svg";
 
 import { Button } from "../../components/Button";
+import { Characters } from "../../components/Characters";
 
 import style from "./Header.module.scss";
 
@@ -10,8 +11,6 @@ export const Header = () => {
   const loginUser = useAppSelector<UserResponse | null>(
     (state) => state.login.loginUser
   );
-
-  const characters = loginUser?.result.name.replace(/(.).+ (.).+/, "$1$2");
 
   return (
     <div className={style.wrapper}>
@@ -28,7 +27,10 @@ export const Header = () => {
       {loginUser ? (
         <div className={style.nameBlock}>
           <div>{loginUser.result.name}</div>
-          <div className={style.avatar}>{characters}</div>
+          <Characters
+            name={loginUser?.result.name}
+            className={style.avatarBlock}
+          />
         </div>
       ) : (
         <div>
