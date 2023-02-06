@@ -3,15 +3,17 @@ import { ChangeEvent, useState } from "react";
 import EyeIcon from "../../image/eye.svg";
 import EyeCloseIcon from "../../image/eye-close.svg";
 
+import cn from "classnames";
 import style from "./Input.module.scss";
 
 interface IInputProps {
   type: string;
-  placeholder: string;
+  placeholder?: string;
+  className?: string;
   value: string;
   name: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  image: string;
+  image?: string;
   eyeIcon?: boolean;
   eyeCloseIcon?: boolean;
 }
@@ -19,6 +21,7 @@ interface IInputProps {
 export const Input = ({
   type,
   placeholder,
+  className,
   value,
   name,
   onChange,
@@ -44,7 +47,7 @@ export const Input = ({
         value={value}
         name={name}
         onChange={onChange}
-        className={style.input}
+        className={cn(style.input, className)}
       />
 
       <img src={image} alt={image} className={style.img} />

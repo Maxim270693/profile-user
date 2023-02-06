@@ -3,7 +3,11 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { initialStateCommon } from "../bll/reducers/commonReducer";
 import { initialStateLogin } from "../bll/reducers/loginReducer";
 import { isErrorAC, isLoadingAC } from "../bll/actions/commonActions/actions";
-import { authLogin } from "../bll/actions/authActions/authActions";
+import {
+  authLogin,
+  emailLogin,
+  passwordLogin,
+} from "../bll/actions/authActions/authActions";
 
 // type Store
 export type RootStateType = ReturnType<typeof rootReducer>;
@@ -21,9 +25,14 @@ export type IsLoadingActionType = ReturnType<typeof isLoadingAC>;
 export type IsErrorActionType = ReturnType<typeof isErrorAC>;
 
 // type ActionsLogin
-export type ActionTypeLogin = authLoginActionType;
+export type ActionTypeLogin =
+  | authLoginActionType
+  | emailLoginActionType
+  | passwordLoginActionType;
 
 export type authLoginActionType = ReturnType<typeof authLogin>;
+export type emailLoginActionType = ReturnType<typeof emailLogin>;
+export type passwordLoginActionType = ReturnType<typeof passwordLogin>;
 
 // type useSelector
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;

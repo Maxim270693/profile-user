@@ -3,10 +3,16 @@ import {
   InitialStateLoginType,
   UserResponse,
 } from "../../types/types";
-import { AUTH_LOGIN } from "../../constants/constants";
+import {
+  AUTH_LOGIN,
+  EMAIL_USER,
+  PASSWORD_USER,
+} from "../../constants/constants";
 
 export const initialStateLogin = {
   loginUser: null as UserResponse | null,
+  email: "",
+  password: "",
 };
 
 export const loginReducer = (
@@ -16,6 +22,10 @@ export const loginReducer = (
   switch (action.type) {
     case AUTH_LOGIN:
       return { ...state, loginUser: action.payload };
+    case EMAIL_USER:
+      return { ...state, email: action.payload };
+    case PASSWORD_USER:
+      return { ...state, password: action.payload };
     default:
       return state;
   }

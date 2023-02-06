@@ -1,7 +1,12 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authLoginTC } from "../../bll/thunks/thunks";
 import { useNavigate } from "react-router-dom";
+
+import {
+  emailLogin,
+  passwordLogin,
+} from "../../bll/actions/authActions/authActions";
 
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
@@ -17,34 +22,34 @@ import style from "./Login.module.scss";
 export const Login = () => {
   const dispatch = useDispatch();
   const isLoading = useAppSelector<boolean>((state) => state.common.isLoading);
-  const loginUser = useAppSelector<UserResponse | null>(
-    (state) => state.login.loginUser
-  );
   const isError = useAppSelector<boolean | null>(
     (state) => state.common.isError
   );
+  const loginUser = useAppSelector<UserResponse | null>(
+    (state) => state.login.loginUser
+  );
+  const email = useAppSelector<string>((state) => state.login.email);
+  const password = useAppSelector<string>((state) => state.login.password);
 
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    email: "superman@gmail.com",
-    password: "123456",
-  });
-
-  const { email, password } = formData;
-
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
+  const onChangeEmailHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(emailLogin(event.target.value));
+  };
+  const onChangePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(passwordLogin(event.target.value));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // @ts-ignore
-    dispatch(authLoginTC(formData));
+    dispatch(authLoginTC({ email, password }));
   };
+
+  /*
+    email: "superman@gmail.com",
+    password: "123456"
+  */
 
   useEffect(() => {
     if (!isError && loginUser) {
@@ -63,28 +68,25 @@ export const Login = () => {
 
             <Input
               type="text"
-              placeholder="Имя"
+              placeholder="Email"
               value={email}
               name="email"
-              onChange={onChangeHandler}
+              onChange={onChangeEmailHandler}
               image={UserIcon}
             />
+
             <Input
               type="password"
               placeholder="Пароль"
               value={password}
               name="password"
-              onChange={onChangeHandler}
+              onChange={onChangePasswordHandler}
               image={PasswordIcon}
               eyeIcon={true}
               eyeCloseIcon={true}
             />
 
-            <Button
-              type="submit"
-              className={style.createAccount}
-              onClick={() => setFormData(formData)}
-            >
+            <Button type="submit" className={style.createAccount}>
               Войти
             </Button>
           </form>
