@@ -62,6 +62,21 @@
     }
   }
 
+  .editBlockList {
+    position: relative;
+
+    .editBtnList {
+      padding: 7px 22px 7px 57px;
+    }
+
+    .imgList {
+      position: absolute;
+      top: 6px;
+      left: 22px;
+      width: 25px;
+    }
+  }
+
   .aboutBlock {
 
     .email {

@@ -1,7 +1,10 @@
-import { Dispatch } from "redux";
 import { API } from "../../api/api";
+import { Dispatch } from "redux";
+
 import { authLogin } from "../actions/authActions/authActions";
+import { getAccountUsers } from "../actions/accountActions/accountActions";
 import { isErrorAC, isLoadingAC } from "../actions/commonActions/actions";
+
 import { UserLoginType } from "../../types/types";
 
 export const authLoginTC =
@@ -19,3 +22,17 @@ export const authLoginTC =
       dispatch(isLoadingAC(false));
     }
   };
+
+export const getAccountUsersTC = () => async (dispatch: Dispatch) => {
+  try {
+    dispatch(isLoadingAC(true));
+    const res = await API.getAccounts();
+    dispatch(getAccountUsers(res.data));
+  } catch (e: any) {
+    dispatch(isErrorAC(true));
+    console.log("error", e.response.data);
+    alert(e.response.data.message);
+  } finally {
+    dispatch(isLoadingAC(false));
+  }
+};

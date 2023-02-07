@@ -8,6 +8,7 @@ import {
   emailLogin,
   passwordLogin,
 } from "../bll/actions/authActions/authActions";
+import { initialStateAccount } from "../bll/reducers/accountReducer";
 
 // type Store
 export type RootStateType = ReturnType<typeof rootReducer>;
@@ -33,6 +34,12 @@ export type ActionTypeLogin =
 export type authLoginActionType = ReturnType<typeof authLogin>;
 export type emailLoginActionType = ReturnType<typeof emailLogin>;
 export type passwordLoginActionType = ReturnType<typeof passwordLogin>;
+
+// type InitialStateListAccounts
+export type InitialStateAccount = typeof initialStateAccount;
+
+// type ActionsAccounts
+export type ActionTypeAccounts = any;
 
 // type useSelector
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
@@ -61,4 +68,29 @@ export type UserResponse = {
   status: number;
   success: boolean;
   token: string;
+};
+
+// type AccountUsers
+export type AddressType = {
+  city: string;
+  geolocation: { lat: string; long: string };
+  number: number;
+  street: string;
+  zipcode: string;
+};
+
+export type NameType = {
+  firstname: string;
+  lastname: string;
+};
+
+export type AccountUsersType = {
+  address: AddressType;
+  email: string;
+  id: number;
+  name: NameType;
+  password: string;
+  phone: string;
+  username: string;
+  __v: number;
 };

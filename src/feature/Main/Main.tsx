@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authLogin } from "../../bll/actions/authActions/authActions";
 
@@ -9,6 +9,7 @@ import { Characters } from "../../components/Characters";
 
 import edit from "../../image/edit.svg";
 import backIcon from "../../image/back.svg";
+import faceAccount from "../../image/faceAccount.svg";
 
 import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Main.module.scss";
@@ -52,6 +53,13 @@ export const Main = () => {
             <img src={edit} alt="edit" className={style.img} />
           </div>
         </div>
+
+        <NavLink to={"/list-accounts"}>
+          <div className={style.editBlockList}>
+            <Button className={style.editBtnList}>Список аккаунтов</Button>
+            <img src={faceAccount} alt="face" className={style.imgList} />
+          </div>
+        </NavLink>
 
         <div className={style.aboutBlock}>
           <p className={style.email}>{loginUser?.result.email}</p>
