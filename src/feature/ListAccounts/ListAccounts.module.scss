@@ -6,11 +6,37 @@
     width: 800px;
     margin: 50px 0 100px 0;
 
-    .title {
-      font-weight: 500;
-      font-size: 30px;
-      line-height: 140%;
-      margin-bottom: 30px;
+    .titleBlock {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .title {
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 140%;
+        margin-bottom: 30px;
+      }
+
+      .btnBlock {
+        position: relative;
+
+        .btnBack {
+          padding: 7px 22px 7px 57px;
+        }
+
+        .img {
+          position: absolute;
+          width: 25px;
+          top: 8px;
+          left: 22px;
+        }
+      }
+    }
+
+    .spinner {
+      display: flex;
+      justify-content: center;
     }
 
     .accountBlockItem {
