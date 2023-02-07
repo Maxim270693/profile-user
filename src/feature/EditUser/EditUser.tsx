@@ -1,8 +1,11 @@
-import React from "react";
+import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { Modal } from "../../components/Modal";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
+import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Edit.module.scss";
 
 interface IEdit {
@@ -11,6 +14,23 @@ interface IEdit {
 }
 
 export const EditUser = ({ isEdit, setIsEdit }: IEdit) => {
+  const dispatch = useDispatch();
+
+  const loginUser = useAppSelector<UserResponse | null>(
+    (state) => state.login.loginUser
+  );
+
+  const [editName, setEditName] = useState(loginUser?.result.name);
+  const [editEmail, setEditEmail] = useState(loginUser?.result.email);
+
+  const onChangeNameHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setEditName(event.target.value);
+  };
+
+  const onChangeEmailHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setEditEmail(event.target.value);
+  };
+
   return (
     <div className={style.wrapper}>
       <Modal isEdit={isEdit} setIsEdit={setIsEdit}>
@@ -22,8 +42,8 @@ export const EditUser = ({ isEdit, setIsEdit }: IEdit) => {
             type="text"
             placeholder="user"
             name="user"
-            value="Владислав"
-            onChange={() => {}}
+            value={editName ? editName : ""}
+            onChange={onChangeNameHandler}
             className={style.inputTitle}
           />
         </div>
@@ -34,10 +54,10 @@ export const EditUser = ({ isEdit, setIsEdit }: IEdit) => {
             <span className={style.example}>example.com/</span>
             <Input
               type="text"
-              placeholder="user"
-              name="user"
-              value="romanov"
-              onChange={() => {}}
+              placeholder="email"
+              name="email"
+              value={editEmail ? editEmail.split("@")[0] : ""}
+              onChange={onChangeEmailHandler}
               className={style.inputEmail}
             />
           </div>

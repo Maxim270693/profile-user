@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authLogin } from "../../bll/actions/authActions/authActions";
 
 import { Button } from "../../components/Button";
 import { EditUser } from "../EditUser";
@@ -12,6 +14,7 @@ import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Main.module.scss";
 
 export const Main = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [isEdit, setIsEdit] = useState(false);
@@ -51,7 +54,7 @@ export const Main = () => {
         </div>
 
         <div className={style.aboutBlock}>
-          <p className={style.email}>example@gmail.com</p>
+          <p className={style.email}>{loginUser?.result.email}</p>
 
           <p className={style.about}>
             Рыбатекст используется дизайнерами, проектировщиками и
@@ -63,7 +66,12 @@ export const Main = () => {
 
           <div className={style.backBlock}>
             <img src={backIcon} alt="backIcon" className={style.img} />
-            <Button className={style.backBtn}>Выйти</Button>
+            <Button
+              className={style.backBtn}
+              onClick={() => dispatch(authLogin(null))}
+            >
+              Выйти
+            </Button>
           </div>
         </div>
       </div>

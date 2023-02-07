@@ -10,7 +10,6 @@ interface IModalProps {
 }
 
 export const Modal = ({ isEdit, setIsEdit, children }: IModalProps) => {
-  console.log("isEdit", isEdit);
   return (
     <div
       className={cn(style.overlay, style.animated, {

@@ -17,7 +17,7 @@
   border-radius: 10px;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease-in-out;
@@ -60,7 +60,7 @@
     .modal {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -40%);
     }
   }
 }
