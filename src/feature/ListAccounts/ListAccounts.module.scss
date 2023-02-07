@@ -1,1 +1,35 @@
-.wrapper {}
+.wrapper {
+  display: flex;
+  justify-content: center;
+
+  .accountBlock {
+    width: 800px;
+    margin: 50px 0 100px 0;
+
+    .title {
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 140%;
+      margin-bottom: 30px;
+    }
+
+    .accountBlockItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E6E6E6;
+
+      .avatarBlock {
+        font-size: 18px;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .account {
+      :first-child {
+        border-top: 1px solid #E6E6E6;
+      }
+    }
+  }
+}
