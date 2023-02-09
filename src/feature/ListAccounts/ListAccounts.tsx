@@ -34,13 +34,13 @@ export const ListAccounts = () => {
   useEffect(() => {
     // @ts-ignore
     dispatch(getAccountUsersTC());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!loginUser) {
       navigate("/login");
     }
-  }, [loginUser]);
+  }, [loginUser, navigate]);
 
   return (
     <div className={style.wrapper}>
@@ -63,7 +63,7 @@ export const ListAccounts = () => {
         ) : (
           <>
             {listAccounts.map((account) => (
-              <Account account={account} />
+              <Account account={account} key={account.id} />
             ))}
           </>
         )}

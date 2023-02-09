@@ -24,7 +24,7 @@ export const Main = () => {
     if (!loginUser) {
       navigate("/login");
     }
-  }, [loginUser]);
+  }, [loginUser, navigate]);
 
   return (
     <>

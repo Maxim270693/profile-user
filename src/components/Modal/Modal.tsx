@@ -14,7 +14,6 @@ export const Modal = ({ isEdit, setIsEdit, children }: IModalProps) => {
     <div
       className={cn(style.overlay, style.animated, {
         [style.show]: isEdit,
-        [""]: !isEdit,
       })}
     >
       <div className={style.modal}>
