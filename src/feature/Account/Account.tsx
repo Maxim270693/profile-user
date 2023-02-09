@@ -1,3 +1,7 @@
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getCurrentUserTC } from "../../bll/thunks/thunks";
+
 import { Characters } from "../../components/Characters";
 
 import { AccountUsersType } from "../../types/types";
@@ -8,16 +12,25 @@ interface IAccountProps {
 }
 
 export const Account = ({ account }: IAccountProps) => {
+  const dispatch = useDispatch();
+
   const fullName = `${account.name.firstname} ${account.name.lastname}`;
 
-  return (
-    <div className={style.wrapper}>
-      <div className={style.avatarBlock}>
-        <Characters name={fullName.toUpperCase()} className={style.avatar} />
-        <div>{fullName}</div>
-      </div>
+  const showModalHandler = () => {
+    // @ts-ignore
+    dispatch(getCurrentUserTC(account.id));
+  };
 
-      <div>{account.email}</div>
-    </div>
+  return (
+    <NavLink to={`/list-accounts/${account.id}`}>
+      <div className={style.wrapper} onClick={showModalHandler}>
+        <div className={style.avatarBlock}>
+          <Characters name={fullName.toUpperCase()} className={style.avatar} />
+          <div>{fullName}</div>
+        </div>
+
+        <div>{account.email}</div>
+      </div>
+    </NavLink>
   );
 };

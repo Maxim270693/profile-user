@@ -8,4 +8,9 @@ export const API = {
   getAccounts() {
     return axios.get<AccountUsersType[]>("https://fakestoreapi.com/users");
   },
+  getCurrentUser(userId: number) {
+    return axios.get<AccountUsersType>(
+      `https://fakestoreapi.com/users/${userId}`
+    );
+  },
 };

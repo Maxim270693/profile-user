@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authLogin } from "../../bll/actions/authActions/authActions";
 
 import { Button } from "../../components/Button";
-import { EditUser } from "../EditUser";
 import { Characters } from "../../components/Characters";
 
-import edit from "../../image/edit.svg";
 import backIcon from "../../image/back.svg";
 import faceAccount from "../../image/faceAccount.svg";
 
@@ -18,13 +16,9 @@ export const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [isEdit, setIsEdit] = useState(false);
-
   const loginUser = useAppSelector<UserResponse | null>(
     (state) => state.login.loginUser
   );
-
-  const showModalHandler = () => setIsEdit(true);
 
   useEffect(() => {
     if (!loginUser) {
@@ -34,8 +28,6 @@ export const Main = () => {
 
   return (
     <>
-      <EditUser isEdit={isEdit} setIsEdit={setIsEdit} />
-
       <div className={style.wrapper}>{""}</div>
 
       <div className={style.content}>
@@ -48,18 +40,13 @@ export const Main = () => {
             {loginUser ? loginUser.result.name : ""}
           </div>
 
-          <div className={style.editBlock} onClick={showModalHandler}>
-            <Button className={style.editBtn}>Редактировать</Button>
-            <img src={edit} alt="edit" className={style.img} />
-          </div>
+          <NavLink to={"/list-accounts"}>
+            <div className={style.editBlockList}>
+              <Button className={style.editBtnList}>Список аккаунтов</Button>
+              <img src={faceAccount} alt="face" className={style.imgList} />
+            </div>
+          </NavLink>
         </div>
-
-        <NavLink to={"/list-accounts"}>
-          <div className={style.editBlockList}>
-            <Button className={style.editBtnList}>Список аккаунтов</Button>
-            <img src={faceAccount} alt="face" className={style.imgList} />
-          </div>
-        </NavLink>
 
         <div className={style.aboutBlock}>
           <p className={style.email}>{loginUser?.result.email}</p>

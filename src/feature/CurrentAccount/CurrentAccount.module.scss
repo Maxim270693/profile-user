@@ -1,0 +1,75 @@
+.wrapper {
+  img {
+    width: 100%;
+  }
+
+  .wrapperItem {
+
+    .currentBlock {
+      display: flex;
+      width: 800px;
+      margin: 0 auto;
+      padding-top: 50px;
+
+      .avatarBlock {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-right: 2px solid #E6E6E6;;
+
+        .avatar {
+          font-size: 32px;
+          width: 150px;
+          height: 150px;
+        }
+
+        .title {
+          font-size: 19px;
+          font-weight: bold;
+          margin-top: 15px;
+        }
+      }
+
+      .aboutBlock {
+        padding: 20px;
+        width: 100%;
+
+        .aboutItem {
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 2px solid #E6E6E6;
+
+          .editBlock {
+            position: relative;
+
+            .image {
+              position: absolute;
+              width: 25px;
+              top: 8px;
+              left: 22px;
+            }
+
+            .editBtn {
+              padding: 7px 22px 7px 57px;
+            }
+          }
+        }
+
+        .item {
+          display: flex;
+        }
+
+        .itemTitle {
+          font-weight: bold;
+          font-size: 17px;
+          padding: 0 10px 20px 0;
+        }
+
+        .aboutBlockBottom {
+          padding-top: 20px;
+        }
+      }
+    }
+  }
+}

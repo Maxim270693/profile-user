@@ -3,10 +3,11 @@ import {
   ActionTypeAccounts,
   InitialStateAccount,
 } from "../../types/types";
-import { GET_ACCOUNTS } from "../../constants/constants";
+import { CURRENT_ACCOUNT, GET_ACCOUNTS } from "../../constants/constants";
 
 export const initialStateAccount = {
   listAccounts: [] as AccountUsersType[],
+  account: null as AccountUsersType | null | undefined,
 };
 
 export const accountReducer = (
@@ -16,6 +17,13 @@ export const accountReducer = (
   switch (action.type) {
     case GET_ACCOUNTS:
       return { ...state, listAccounts: action.payload };
+    case CURRENT_ACCOUNT:
+      return {
+        ...state,
+        account: state.listAccounts.find(
+          (item) => item.id === action.payload.id
+        ),
+      };
     default:
       return state;
   }

@@ -61,11 +61,11 @@ export const ListAccounts = () => {
             <Spinner />
           </div>
         ) : (
-          <div className={style.account}>
+          <>
             {listAccounts.map((account) => (
               <Account account={account} />
             ))}
-          </div>
+          </>
         )}
       </div>
     </div>
