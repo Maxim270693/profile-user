@@ -7,7 +7,7 @@ import { CURRENT_ACCOUNT, GET_ACCOUNTS } from "../../constants/constants";
 
 export const initialStateAccount = {
   listAccounts: [] as AccountUsersType[],
-  account: null as AccountUsersType | null | undefined,
+  account: null as AccountUsersType | null,
 };
 
 export const accountReducer = (
@@ -20,9 +20,9 @@ export const accountReducer = (
     case CURRENT_ACCOUNT:
       return {
         ...state,
-        account: state.listAccounts.find(
-          (item) => item.id === action.payload.id
-        ),
+        account:
+          state.listAccounts.find((item) => item.id === action.payload.id) ||
+          null,
       };
     default:
       return state;

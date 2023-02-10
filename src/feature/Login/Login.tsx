@@ -21,6 +21,7 @@ import style from "./Login.module.scss";
 
 export const Login = () => {
   const dispatch = useDispatch();
+
   const isLoading = useAppSelector<boolean>((state) => state.common.isLoading);
   const isError = useAppSelector<boolean | null>(
     (state) => state.common.isError
@@ -45,11 +46,6 @@ export const Login = () => {
     // @ts-ignore
     dispatch(authLoginTC({ email, password }));
   };
-
-  /*
-    email: "superman@gmail.com",
-    password: "123456"
-  */
 
   useEffect(() => {
     if (!isError && loginUser) {

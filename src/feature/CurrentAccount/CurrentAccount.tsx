@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { Button } from "../../components/Button";
 import { EditUser } from "../EditUser";
@@ -9,24 +8,17 @@ import { Characters } from "../../components/Characters";
 import background from "../../image/background.svg";
 import editIcon from "../../image/edit.svg";
 
-import {
-  AccountUsersType,
-  useAppSelector,
-  UserResponse,
-} from "../../types/types";
+import { useNavigateState } from "../../utils/utils";
+
+import { AccountUsersType, useAppSelector } from "../../types/types";
 import style from "./CurrentAccount.module.scss";
 
 export const CurrentAccount = () => {
-  const navigate = useNavigate();
-
-  const isLoading = useAppSelector<boolean>((state) => state.common.isLoading);
-  const loginUser = useAppSelector<UserResponse | null>(
-    (state) => state.login.loginUser
-  );
-
   const [isEdit, setIsEdit] = useState(false);
 
-  const currentUser = useAppSelector<AccountUsersType | null | undefined>( // норм такая типизация ?
+  const isLoading = useAppSelector<boolean>((state) => state.common.isLoading);
+
+  const currentUser = useAppSelector<AccountUsersType | null>(
     (state) => state.accounts.account
   );
 
@@ -93,11 +85,7 @@ export const CurrentAccount = () => {
     );
   };
 
-  useEffect(() => {
-    if (!loginUser) {
-      navigate("/login");
-    }
-  }, [loginUser, navigate]);
+  useNavigateState();
 
   return (
     <div className={style.wrapper}>
@@ -106,15 +94,13 @@ export const CurrentAccount = () => {
           <img src={background} alt="background" />
         </div>
 
-        {isEdit ? (
-          <EditUser
-            isEdit={isEdit}
-            setIsEdit={setIsEdit}
-            currentUser={currentUser}
-          />
-        ) : (
-          <>{renderCurrentAccount()}</>
-        )}
+        <EditUser
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          currentUser={currentUser}
+        />
+
+        {renderCurrentAccount()}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useInputState } from "../../utils/utils";
 
 import { Modal } from "../../components/Modal";
 import { Input } from "../../components/Input";
@@ -11,34 +11,28 @@ import { AccountUsersType } from "../../types/types";
 interface IEdit {
   isEdit: boolean;
   setIsEdit: (isEdit: boolean) => void;
-  currentUser: AccountUsersType | null | undefined;
+  currentUser: AccountUsersType | null;
 }
 
 export const EditUser = ({ isEdit, setIsEdit, currentUser }: IEdit) => {
   const dispatch = useDispatch();
 
-  const [editFirstName, setEditFirstName] = useState(
-    currentUser?.name.firstname
+  const [editFirstName, onChangeFirstNameHandler] = useInputState(
+    currentUser?.name.firstname,
+    true
   );
-  const [editLastName, setEditLastName] = useState(currentUser?.name.lastname);
-  const [editEmail, setEditEmail] = useState(currentUser?.email);
-  const [editCity, setEditCity] = useState(currentUser?.address.city);
-
-  const onChangeFirstNameHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditFirstName(event.target.value);
-  };
-
-  const onChangeLastNameHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditLastName(event.target.value);
-  };
-
-  const onChangeEmailHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditEmail(event.target.value);
-  };
-
-  const onChangeCityHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditCity(event.target.value);
-  };
+  const [editLastName, onChangeLastNameHandler] = useInputState(
+    currentUser?.name.lastname,
+    true
+  );
+  const [editEmail, onChangeEmailHandler] = useInputState(
+    currentUser?.email,
+    true
+  );
+  const [editCity, onChangeCityHandler] = useInputState(
+    currentUser?.address.city,
+    true
+  );
 
   return (
     <div className={style.wrapper}>

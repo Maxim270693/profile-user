@@ -4,25 +4,20 @@ import { getAccountUsersTC } from "../../bll/thunks/thunks";
 
 import { Button } from "../../components/Button";
 import { Account } from "../Account";
+import { Spinner } from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";
 
 import ArrowBack from "../../image/arrow-back.svg";
 
-import {
-  AccountUsersType,
-  useAppSelector,
-  UserResponse,
-} from "../../types/types";
+import { useNavigateState } from "../../utils/utils";
+
+import { AccountUsersType, useAppSelector } from "../../types/types";
 import style from "./ListAccounts.module.scss";
-import { Spinner } from "../../components/Spinner";
 
 export const ListAccounts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loginUser = useAppSelector<UserResponse | null>(
-    (state) => state.login.loginUser
-  );
   const listAccounts = useAppSelector<AccountUsersType[]>(
     (state) => state.accounts.listAccounts
   );
@@ -36,11 +31,7 @@ export const ListAccounts = () => {
     dispatch(getAccountUsersTC());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!loginUser) {
-      navigate("/login");
-    }
-  }, [loginUser, navigate]);
+  useNavigateState();
 
   return (
     <div className={style.wrapper}>

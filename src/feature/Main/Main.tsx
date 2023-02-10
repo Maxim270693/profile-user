@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authLogin } from "../../bll/actions/authActions/authActions";
 
@@ -9,22 +8,19 @@ import { Characters } from "../../components/Characters";
 import backIcon from "../../image/back.svg";
 import faceAccount from "../../image/faceAccount.svg";
 
+import { useNavigateState } from "../../utils/utils";
+
 import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Main.module.scss";
 
 export const Main = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const loginUser = useAppSelector<UserResponse | null>(
     (state) => state.login.loginUser
   );
 
-  useEffect(() => {
-    if (!loginUser) {
-      navigate("/login");
-    }
-  }, [loginUser, navigate]);
+  useNavigateState();
 
   return (
     <>
