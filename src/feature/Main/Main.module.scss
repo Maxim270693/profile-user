@@ -45,36 +45,6 @@
         margin-bottom: 10px;
       }
     }
-
-    .editBlock {
-      position: relative;
-
-      .editBtn {
-        border: 1px solid #D5D5D5;
-        padding: 7px 22px 7px 57px;
-      }
-
-      .img {
-        position: absolute;
-        top: 6px;
-        left: 22px;
-      }
-    }
-  }
-
-  .editBlockList {
-    position: relative;
-
-    .editBtnList {
-      padding: 7px 22px 7px 57px;
-    }
-
-    .imgList {
-      position: absolute;
-      top: 6px;
-      left: 22px;
-      width: 25px;
-    }
   }
 
   .aboutBlock {
@@ -92,20 +62,6 @@
 
       @media screen and (max-width: 900px) {
         max-width: 500px;
-      }
-    }
-
-    .backBlock {
-      position: relative;
-
-      .img {
-        position: absolute;
-        left: 22px;
-        top: 7px;
-      }
-
-      .backBtn {
-        padding: 7px 22px 7px 57px;
       }
     }
   }

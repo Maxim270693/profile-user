@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authLogin } from "../../bll/actions/authActions/authActions";
 
-import { Button } from "../../components/Button";
 import { Characters } from "../../components/Characters";
+import { ButtonWithIcon } from "../../components/ButtonWithIcon";
 
 import backIcon from "../../image/back.svg";
 import faceAccount from "../../image/faceAccount.svg";
@@ -37,10 +37,11 @@ export const Main = () => {
           </div>
 
           <NavLink to={"/list-accounts"}>
-            <div className={style.editBlockList}>
-              <Button className={style.editBtnList}>Список аккаунтов</Button>
-              <img src={faceAccount} alt="face" className={style.imgList} />
-            </div>
+            <ButtonWithIcon
+              alt="face"
+              img={faceAccount}
+              title="Список аккаунтов"
+            />
           </NavLink>
         </div>
 
@@ -55,15 +56,12 @@ export const Main = () => {
             типографику в деле.
           </p>
 
-          <div className={style.backBlock}>
-            <img src={backIcon} alt="backIcon" className={style.img} />
-            <Button
-              className={style.backBtn}
-              onClick={() => dispatch(authLogin(null))}
-            >
-              Выйти
-            </Button>
-          </div>
+          <ButtonWithIcon
+            onClick={() => dispatch(authLogin(null))}
+            alt="backIcon"
+            img={backIcon}
+            title="Выйти"
+          />
         </div>
       </div>
     </>

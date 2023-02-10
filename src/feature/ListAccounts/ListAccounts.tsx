@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAccountUsersTC } from "../../bll/thunks/thunks";
 
-import { Button } from "../../components/Button";
 import { Account } from "../Account";
 import { Spinner } from "../../components/Spinner";
-import { useNavigate } from "react-router-dom";
+import { ButtonWithIcon } from "../../components/ButtonWithIcon";
 
 import ArrowBack from "../../image/arrow-back.svg";
 
@@ -39,12 +39,12 @@ export const ListAccounts = () => {
         <div className={style.titleBlock}>
           <div className={style.title}>Список аккаунтов</div>
 
-          <div className={style.btnBlock}>
-            <Button className={style.btnBack} onClick={goBackHandler}>
-              Вернуться назад
-            </Button>
-            <img src={ArrowBack} alt="ArrowBack" className={style.img} />
-          </div>
+          <ButtonWithIcon
+            alt="ArrowBack"
+            img={ArrowBack}
+            onClick={goBackHandler}
+            title="Вернуться назад"
+          />
         </div>
 
         {isLoading ? (

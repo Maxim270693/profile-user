@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { Button } from "../../components/Button";
 import { EditUser } from "../EditUser";
 import { MyLoader } from "../../components/Sceleton";
 import { Characters } from "../../components/Characters";
+import { ButtonWithIcon } from "../../components/ButtonWithIcon";
 
 import background from "../../image/background.svg";
 import editIcon from "../../image/edit.svg";
@@ -56,12 +56,12 @@ export const CurrentAccount = () => {
               </div>
             </div>
 
-            <div className={style.editBlock}>
-              <img src={editIcon} alt="editIcon" className={style.image} />
-              <Button className={style.editBtn} onClick={() => setIsEdit(true)}>
-                Редактировать
-              </Button>
-            </div>
+            <ButtonWithIcon
+              alt="editIcon"
+              img={editIcon}
+              onClick={() => setIsEdit(true)}
+              title="Редактировать"
+            />
           </div>
 
           <div className={style.aboutBlockBottom}>

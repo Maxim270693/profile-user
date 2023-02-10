@@ -39,21 +39,6 @@
           display: flex;
           justify-content: space-between;
           border-bottom: 2px solid #E6E6E6;
-
-          .editBlock {
-            position: relative;
-
-            .image {
-              position: absolute;
-              width: 25px;
-              top: 8px;
-              left: 22px;
-            }
-
-            .editBtn {
-              padding: 7px 22px 7px 57px;
-            }
-          }
         }
 
         .item {

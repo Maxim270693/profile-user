@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 import style from "./Button.module.scss";
 import cn from "classnames";
@@ -8,7 +8,7 @@ interface IButtonProps {
   children: ReactNode;
   className?: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const Button = ({
