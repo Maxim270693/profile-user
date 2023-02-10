@@ -13,4 +13,9 @@ export const API = {
       `https://fakestoreapi.com/users/${userId}`
     );
   },
+  deleteAccount(userId: number) {
+    return axios.delete<AccountUsersType>(
+      `https://fakestoreapi.com/users/${userId}`
+    );
+  },
 };

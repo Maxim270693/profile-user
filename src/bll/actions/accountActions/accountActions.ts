@@ -1,4 +1,8 @@
-import { CURRENT_ACCOUNT, GET_ACCOUNTS } from "../../../constants/constants";
+import {
+  CURRENT_ACCOUNT,
+  DELETE_ACCOUNT,
+  GET_ACCOUNTS,
+} from "../../../constants/constants";
 import { AccountUsersType } from "../../../types/types";
 
 export const getAccountUsers = (payload: AccountUsersType[]) =>
@@ -6,3 +10,6 @@ export const getAccountUsers = (payload: AccountUsersType[]) =>
 
 export const getCurrentUserAC = (payload: AccountUsersType) =>
   ({ type: CURRENT_ACCOUNT, payload } as const);
+
+export const deleteUserAC = (payload: number) =>
+  ({ type: DELETE_ACCOUNT, payload } as const);

@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getCurrentUserTC } from "../../bll/thunks/thunks";
+import { deleteUserTC, getCurrentUserTC } from "../../bll/thunks/thunks";
 
 import { Characters } from "../../components/Characters";
 import { ButtonWithIcon } from "../../components/ButtonWithIcon";
@@ -27,6 +27,8 @@ export const Account = ({ account }: IAccountProps) => {
 
   const onDeleteHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    // @ts-ignore
+    dispatch(deleteUserTC(account.id));
   };
 
   return (

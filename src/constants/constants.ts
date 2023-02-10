@@ -5,3 +5,4 @@ export const EMAIL_USER = "EMAIL_USER";
 export const PASSWORD_USER = "PASSWORD_USER";
 export const GET_ACCOUNTS = "GET_ACCOUNTS";
 export const CURRENT_ACCOUNT = "CURRENT_ACCOUNT";
+export const DELETE_ACCOUNT = "DELETE_ACCOUNT";

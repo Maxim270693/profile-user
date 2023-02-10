@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 
 import { authLogin } from "../actions/authActions/authActions";
 import {
+  deleteUserAC,
   getAccountUsers,
   getCurrentUserAC,
 } from "../actions/accountActions/accountActions";
@@ -54,3 +55,17 @@ export const getCurrentUserTC =
       dispatch(isLoadingAC(false));
     }
   };
+
+export const deleteUserTC = (userId: number) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(isLoadingAC(true));
+    const res = await API.deleteAccount(userId);
+    dispatch(deleteUserAC(res.data.id));
+  } catch (e: any) {
+    dispatch(isErrorAC(true));
+    console.log("error", e.response.data);
+    alert(e.response.data.message);
+  } finally {
+    dispatch(isLoadingAC(false));
+  }
+};

@@ -9,6 +9,11 @@ import {
   passwordLogin,
 } from "../bll/actions/authActions/authActions";
 import { initialStateAccount } from "../bll/reducers/accountReducer";
+import {
+  deleteUserAC,
+  getAccountUsers,
+  getCurrentUserAC,
+} from "../bll/actions/accountActions/accountActions";
 
 // type Store
 export type RootStateType = ReturnType<typeof rootReducer>;
@@ -39,7 +44,14 @@ export type passwordLoginActionType = ReturnType<typeof passwordLogin>;
 export type InitialStateAccount = typeof initialStateAccount;
 
 // type ActionsAccounts
-export type ActionTypeAccounts = any;
+export type ActionTypeAccounts =
+  | getAccountUserActionType
+  | getCurrentUserActionType
+  | deleteUserActionType;
+
+export type getAccountUserActionType = ReturnType<typeof getAccountUsers>;
+export type getCurrentUserActionType = ReturnType<typeof getCurrentUserAC>;
+export type deleteUserActionType = ReturnType<typeof deleteUserAC>;
 
 // type useSelector
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;

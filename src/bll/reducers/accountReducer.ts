@@ -3,7 +3,11 @@ import {
   ActionTypeAccounts,
   InitialStateAccount,
 } from "../../types/types";
-import { CURRENT_ACCOUNT, GET_ACCOUNTS } from "../../constants/constants";
+import {
+  CURRENT_ACCOUNT,
+  DELETE_ACCOUNT,
+  GET_ACCOUNTS,
+} from "../../constants/constants";
 
 export const initialStateAccount = {
   listAccounts: [] as AccountUsersType[],
@@ -23,6 +27,13 @@ export const accountReducer = (
         account:
           state.listAccounts.find((item) => item.id === action.payload.id) ||
           null,
+      };
+    case DELETE_ACCOUNT:
+      return {
+        ...state,
+        listAccounts: state.listAccounts.filter(
+          (item) => item.id !== action.payload
+        ),
       };
     default:
       return state;
