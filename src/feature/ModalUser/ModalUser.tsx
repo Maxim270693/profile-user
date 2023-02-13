@@ -1,57 +1,83 @@
 import { useDispatch } from "react-redux";
 import { useInputState } from "../../utils/utils";
-import { updateCurrentUserTC } from "../../bll/thunks/thunks";
+import { addAccountTC, updateCurrentUserTC } from "../../bll/thunks/thunks";
 
 import { Modal } from "../../components/Modal";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
-import style from "./Edit.module.scss";
-import { AccountUsersType } from "../../types/types";
+import style from "./ModalUser.module.scss";
+import { AccountUsersType, RenderTitleType } from "../../types/types";
 
-interface IEdit {
+interface IModalUser {
   isEdit: boolean;
   setIsEdit: (isEdit: boolean) => void;
   currentUser: AccountUsersType | null;
+  type: string;
 }
 
-export const EditUser = ({ isEdit, setIsEdit, currentUser }: IEdit) => {
+export const ModalUser = ({
+  isEdit,
+  setIsEdit,
+  currentUser,
+  type,
+}: IModalUser) => {
   const dispatch = useDispatch();
 
   const [editFirstName, onChangeFirstNameHandler] = useInputState(
-    currentUser?.name.firstname,
+    type !== "add" ? currentUser?.name.firstname : "",
     true
   );
   const [editLastName, onChangeLastNameHandler] = useInputState(
-    currentUser?.name.lastname,
+    type !== "add" ? currentUser?.name.lastname : "",
     true
   );
   const [editEmail, onChangeEmailHandler] = useInputState(
-    currentUser?.email,
+    type !== "add" ? currentUser?.email : "",
     true
   );
   const [editCity, onChangeCityHandler] = useInputState(
-    currentUser?.address.city,
+    type !== "add" ? currentUser?.address.city : "",
     true
   );
 
-  const payload = {
-    ...currentUser,
-    email: editEmail,
-    name: {
-      firstname: editFirstName,
-      lastname: editLastName,
-    },
-    address: {
-      ...currentUser?.address,
-      city: editCity,
-    },
+  const onSaveHandler = () => {
+    const payload = {
+      ...currentUser,
+      email: editEmail,
+      name: {
+        firstname: editFirstName,
+        lastname: editLastName,
+      },
+      address: {
+        ...currentUser?.address,
+        city: editCity,
+      },
+    };
+    dispatch(
+      // @ts-ignore
+      type === "edit"
+        ? // @ts-ignore
+          updateCurrentUserTC(currentUser.id, payload)
+        : // @ts-ignore
+          addAccountTC(payload)
+    );
+    setIsEdit(false);
+  };
+
+  const renderTitle = (type: string) => {
+    const typeObj: RenderTitleType = {
+      edit: "Редактировать профиль",
+      add: "Добавить профиль",
+    };
+
+    return typeObj[type] ?? "";
   };
 
   return (
     <div className={style.wrapper}>
       <Modal isEdit={isEdit} setIsEdit={setIsEdit}>
-        <h1>Редактировать профиль</h1>
+        <h1>{renderTitle(type)}</h1>
 
         <div>
           <label className={style.label}>Имя</label>
@@ -108,16 +134,7 @@ export const EditUser = ({ isEdit, setIsEdit, currentUser }: IEdit) => {
           <Button className={style.btn} onClick={() => setIsEdit(false)}>
             Отмена
           </Button>
-          <Button
-            className={style.btnSave}
-            onClick={() => {
-              dispatch(
-                // @ts-ignore
-                updateCurrentUserTC(currentUser.id, payload)
-              );
-              setIsEdit(false);
-            }}
-          >
+          <Button className={style.btnSave} onClick={onSaveHandler}>
             Сохранить
           </Button>
         </div>

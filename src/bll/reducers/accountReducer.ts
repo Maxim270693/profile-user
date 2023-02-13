@@ -4,6 +4,7 @@ import {
   InitialStateAccount,
 } from "../../types/types";
 import {
+  ADD_ACCOUNT,
   CURRENT_ACCOUNT,
   DELETE_ACCOUNT,
   GET_ACCOUNTS,
@@ -40,6 +41,12 @@ export const accountReducer = (
       return {
         ...state,
         account: action.payload,
+      };
+    case ADD_ACCOUNT:
+      return {
+        ...state,
+        //@ts-ignore
+        listAccounts: [action.payload, ...state.listAccounts],
       };
     default:
       return state;

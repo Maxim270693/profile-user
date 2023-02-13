@@ -1,5 +1,10 @@
 import axios from "axios";
-import { AccountUsersType, UserLoginType, UserResponse } from "../types/types";
+import {
+  AccountUsersType,
+  AddAccountType,
+  UserLoginType,
+  UserResponse,
+} from "../types/types";
 
 export const API = {
   login(payload: UserLoginType) {
@@ -19,6 +24,15 @@ export const API = {
     );
   },
   updateCurrentAccount(userId: number, payload: AccountUsersType) {
-    return axios.put(`https://fakestoreapi.com/users/${userId}`, payload);
+    return axios.put<AccountUsersType>(
+      `https://fakestoreapi.com/users/${userId}`,
+      payload
+    );
+  },
+  addAccount(payload: AddAccountType) {
+    return axios.post<AccountUsersType>(
+      "https://fakestoreapi.com/users",
+      payload
+    );
   },
 };

@@ -16,7 +16,7 @@ export const useInputState = (value?: string, shouldUpdate?: true) => {
   return [state, onChange] as const;
 };
 
-export const useNavigateState = () => {
+export const useRedirectNotLoggedIn = () => {
   const navigate = useNavigate();
 
   const loginUser = useAppSelector<UserResponse | null>(

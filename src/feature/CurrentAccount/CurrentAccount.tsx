@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-import { EditUser } from "../EditUser";
 import { MyLoader } from "../../components/Sceleton";
+import { ModalUser } from "../ModalUser";
 import { Characters } from "../../components/Characters";
 import { ButtonWithIcon } from "../../components/ButtonWithIcon";
 
 import background from "../../image/background.svg";
 import editIcon from "../../image/edit.svg";
 
-import { useNavigateState } from "../../utils/utils";
+import { useRedirectNotLoggedIn } from "../../utils/utils";
 
 import { AccountUsersType, useAppSelector } from "../../types/types";
 import style from "./CurrentAccount.module.scss";
@@ -85,7 +85,7 @@ export const CurrentAccount = () => {
     );
   };
 
-  useNavigateState();
+  useRedirectNotLoggedIn();
 
   return (
     <div className={style.wrapper}>
@@ -94,10 +94,11 @@ export const CurrentAccount = () => {
           <img src={background} alt="background" />
         </div>
 
-        <EditUser
+        <ModalUser
           isEdit={isEdit}
           setIsEdit={setIsEdit}
           currentUser={currentUser}
+          type="edit"
         />
 
         {renderCurrentAccount()}

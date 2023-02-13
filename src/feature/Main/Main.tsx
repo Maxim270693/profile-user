@@ -8,7 +8,7 @@ import { ButtonWithIcon } from "../../components/ButtonWithIcon";
 import backIcon from "../../image/back.svg";
 import faceAccount from "../../image/faceAccount.svg";
 
-import { useNavigateState } from "../../utils/utils";
+import { useRedirectNotLoggedIn } from "../../utils/utils";
 
 import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Main.module.scss";
@@ -20,7 +20,7 @@ export const Main = () => {
     (state) => state.login.loginUser
   );
 
-  useNavigateState();
+  useRedirectNotLoggedIn();
 
   return (
     <>

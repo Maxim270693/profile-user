@@ -10,6 +10,7 @@ import {
 } from "../bll/actions/authActions/authActions";
 import { initialStateAccount } from "../bll/reducers/accountReducer";
 import {
+  addAccountAC,
   deleteUserAC,
   getAccountUsers,
   getCurrentUserAC,
@@ -49,12 +50,14 @@ export type ActionTypeAccounts =
   | getAccountUserActionType
   | getCurrentUserActionType
   | deleteUserActionType
-  | updateUserActionType;
+  | updateUserActionType
+  | addAccountActionType;
 
 export type getAccountUserActionType = ReturnType<typeof getAccountUsers>;
 export type getCurrentUserActionType = ReturnType<typeof getCurrentUserAC>;
 export type deleteUserActionType = ReturnType<typeof deleteUserAC>;
 export type updateUserActionType = ReturnType<typeof updateCurrentUserAC>;
+export type addAccountActionType = ReturnType<typeof addAccountAC>;
 
 // type useSelector
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
@@ -107,5 +110,32 @@ export type AccountUsersType = {
   password: string;
   phone: string;
   username: string;
-  __v: number;
+  __v?: number;
+};
+
+// type AddAccount
+export type AddAccountType = {
+  email: string;
+  username: string;
+  password: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
+  address: {
+    city: string;
+    street: string;
+    number: number;
+    zipcode: string;
+    geolocation: {
+      lat: string;
+      long: string;
+    };
+  };
+  phone: string;
+};
+
+// RenderTitleType
+export type RenderTitleType = {
+  [key: string]: string;
 };
