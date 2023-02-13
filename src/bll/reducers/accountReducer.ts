@@ -7,6 +7,7 @@ import {
   CURRENT_ACCOUNT,
   DELETE_ACCOUNT,
   GET_ACCOUNTS,
+  UPDATE_ACCOUNT,
 } from "../../constants/constants";
 
 export const initialStateAccount = {
@@ -34,6 +35,11 @@ export const accountReducer = (
         listAccounts: state.listAccounts.filter(
           (item) => item.id !== action.payload
         ),
+      };
+    case UPDATE_ACCOUNT:
+      return {
+        ...state,
+        account: action.payload,
       };
     default:
       return state;

@@ -13,6 +13,7 @@ import {
   deleteUserAC,
   getAccountUsers,
   getCurrentUserAC,
+  updateCurrentUserAC,
 } from "../bll/actions/accountActions/accountActions";
 
 // type Store
@@ -47,11 +48,13 @@ export type InitialStateAccount = typeof initialStateAccount;
 export type ActionTypeAccounts =
   | getAccountUserActionType
   | getCurrentUserActionType
-  | deleteUserActionType;
+  | deleteUserActionType
+  | updateUserActionType;
 
 export type getAccountUserActionType = ReturnType<typeof getAccountUsers>;
 export type getCurrentUserActionType = ReturnType<typeof getCurrentUserAC>;
 export type deleteUserActionType = ReturnType<typeof deleteUserAC>;
+export type updateUserActionType = ReturnType<typeof updateCurrentUserAC>;
 
 // type useSelector
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;

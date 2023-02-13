@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useInputState } from "../../utils/utils";
+import { updateCurrentUserTC } from "../../bll/thunks/thunks";
 
 import { Modal } from "../../components/Modal";
 import { Input } from "../../components/Input";
@@ -33,6 +34,19 @@ export const EditUser = ({ isEdit, setIsEdit, currentUser }: IEdit) => {
     currentUser?.address.city,
     true
   );
+
+  const payload = {
+    ...currentUser,
+    email: editEmail,
+    name: {
+      firstname: editFirstName,
+      lastname: editLastName,
+    },
+    address: {
+      ...currentUser?.address,
+      city: editCity,
+    },
+  };
 
   return (
     <div className={style.wrapper}>
@@ -94,7 +108,18 @@ export const EditUser = ({ isEdit, setIsEdit, currentUser }: IEdit) => {
           <Button className={style.btn} onClick={() => setIsEdit(false)}>
             Отмена
           </Button>
-          <Button className={style.btnSave}>Сохранить</Button>
+          <Button
+            className={style.btnSave}
+            onClick={() => {
+              dispatch(
+                // @ts-ignore
+                updateCurrentUserTC(currentUser.id, payload)
+              );
+              setIsEdit(false);
+            }}
+          >
+            Сохранить
+          </Button>
         </div>
       </Modal>
     </div>

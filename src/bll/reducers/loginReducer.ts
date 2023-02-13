@@ -9,8 +9,10 @@ import {
   PASSWORD_USER,
 } from "../../constants/constants";
 
+const temp = localStorage.getItem("login");
+
 export const initialStateLogin = {
-  loginUser: null as UserResponse | null,
+  loginUser: temp ? JSON.parse(temp) : (null as UserResponse | null),
   email: "",
   password: "",
 };

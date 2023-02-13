@@ -18,4 +18,7 @@ export const API = {
       `https://fakestoreapi.com/users/${userId}`
     );
   },
+  updateCurrentAccount(userId: number, payload: AccountUsersType) {
+    return axios.put(`https://fakestoreapi.com/users/${userId}`, payload);
+  },
 };
