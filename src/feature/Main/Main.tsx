@@ -20,6 +20,11 @@ export const Main = () => {
     (state) => state.login.loginUser
   );
 
+  const onExitHandler = () => {
+    dispatch(authLogin(null));
+    localStorage.removeItem("login");
+  };
+
   useRedirectNotLoggedIn();
 
   return (
@@ -57,7 +62,7 @@ export const Main = () => {
           </p>
 
           <ButtonWithIcon
-            onClick={() => dispatch(authLogin(null))}
+            onClick={onExitHandler}
             alt="backIcon"
             img={backIcon}
             title="Выйти"
