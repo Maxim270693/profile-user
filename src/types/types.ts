@@ -5,6 +5,7 @@ import { initialStateLogin } from "../bll/reducers/loginReducer";
 import { isErrorAC, isLoadingAC } from "../bll/actions/commonActions/actions";
 import {
   authLogin,
+  authRegister,
   emailLogin,
   passwordLogin,
 } from "../bll/actions/authActions/authActions";
@@ -16,6 +17,23 @@ import {
   getCurrentUserAC,
   updateCurrentUserAC,
 } from "../bll/actions/accountActions/accountActions";
+import { initialStateRegister } from "../bll/reducers/registerReducer";
+import { ThunkAction } from "redux-thunk";
+
+// type AppActionsType
+export type AppActionsType =
+  | ActionTypeCommon
+  | ActionTypeLogin
+  | ActionsRegisterType
+  | ActionTypeAccounts;
+
+// type AppThunk
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootStateType,
+  unknown,
+  AppActionsType
+>;
 
 // type Store
 export type RootStateType = ReturnType<typeof rootReducer>;
@@ -25,6 +43,9 @@ export type InitialStateCommonType = typeof initialStateCommon;
 
 // type InitialStateLogin
 export type InitialStateLoginType = typeof initialStateLogin;
+
+// type InitialStateLogin
+export type InitialStateRegisterType = typeof initialStateRegister;
 
 // type ActionsCommon
 export type ActionTypeCommon = IsLoadingActionType | IsErrorActionType;
@@ -41,6 +62,11 @@ export type ActionTypeLogin =
 export type authLoginActionType = ReturnType<typeof authLogin>;
 export type emailLoginActionType = ReturnType<typeof emailLogin>;
 export type passwordLoginActionType = ReturnType<typeof passwordLogin>;
+
+// type ActionsRegister
+export type ActionsRegisterType = authRegisterActionType;
+
+export type authRegisterActionType = ReturnType<typeof authRegister>;
 
 // type InitialStateListAccounts
 export type InitialStateAccount = typeof initialStateAccount;
@@ -138,4 +164,22 @@ export type AddAccountType = {
 // RenderTitleType
 export type RenderTitleType = {
   [key: string]: string;
+};
+
+// RegisterType
+export type RegisterType = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  password_confirmation: string;
+};
+
+// type RegisterResponseType
+export type RegisterResponseType = {
+  errors: string[];
+  message: string;
+  status: number;
+  success: string;
+  token: string;
 };

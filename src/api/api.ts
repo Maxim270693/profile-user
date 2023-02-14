@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   AccountUsersType,
   AddAccountType,
+  RegisterResponseType,
+  RegisterType,
   UserLoginType,
   UserResponse,
 } from "../types/types";
@@ -9,6 +11,12 @@ import {
 export const API = {
   login(payload: UserLoginType) {
     return axios.post<UserResponse>("https://apingweb.com/api/login", payload);
+  },
+  register(payload: RegisterType) {
+    return axios.post<RegisterResponseType>(
+      "https://apingweb.com/api/register",
+      payload
+    );
   },
   getAccounts() {
     return axios.get<AccountUsersType[]>("https://fakestoreapi.com/users");

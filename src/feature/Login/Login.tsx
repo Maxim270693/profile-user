@@ -1,6 +1,5 @@
-import { ChangeEvent, FormEvent, useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { authLoginTC } from "../../bll/thunks/thunks";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -9,7 +8,7 @@ import {
 } from "../../bll/actions/authActions/authActions";
 
 import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import { Form } from "../Form";
 import { Footer } from "../Footer";
 import { Spinner } from "../../components/Spinner";
 
@@ -41,12 +40,6 @@ export const Login = () => {
     dispatch(passwordLogin(event.target.value));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // @ts-ignore
-    dispatch(authLoginTC({ email, password }));
-  };
-
   useEffect(() => {
     if (!isError && loginUser) {
       navigate("/");
@@ -59,9 +52,7 @@ export const Login = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <form onSubmit={handleSubmit} className={style.formRegister}>
-            <h1>Вход в Yoldi Agency</h1>
-
+          <Form type="login" email={email} password={password}>
             <Input
               type="text"
               placeholder="Email"
@@ -70,6 +61,8 @@ export const Login = () => {
               onChange={onChangeEmailHandler}
               image={UserIcon}
             />
+
+            {/*{isError && isError}*/}
 
             <Input
               type="password"
@@ -81,13 +74,10 @@ export const Login = () => {
               eyeIcon={true}
               eyeCloseIcon={true}
             />
-
-            <Button type="submit" className={style.createAccount}>
-              Войти
-            </Button>
-          </form>
+          </Form>
         )}
       </div>
+
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 import { API } from "../../api/api";
 import { Dispatch } from "redux";
 
-import { authLogin } from "../actions/authActions/authActions";
+import { authLogin, authRegister } from "../actions/authActions/authActions";
 import {
   addAccountAC,
   deleteUserAC,
@@ -14,11 +14,14 @@ import { isErrorAC, isLoadingAC } from "../actions/commonActions/actions";
 import {
   AccountUsersType,
   AddAccountType,
+  AppThunk,
+  RegisterType,
   UserLoginType,
 } from "../../types/types";
 
 export const authLoginTC =
-  (payload: UserLoginType) => async (dispatch: Dispatch) => {
+  (payload: UserLoginType): AppThunk =>
+  async (dispatch) => {
     try {
       dispatch(isLoadingAC(true));
 
@@ -32,6 +35,22 @@ export const authLoginTC =
 
       console.log("error", e.response.data);
       alert(e.response.data.message);
+    } finally {
+      dispatch(isLoadingAC(false));
+    }
+  };
+
+export const authRegisterTC =
+  (payload: RegisterType) => async (dispatch: Dispatch) => {
+    try {
+      dispatch(isLoadingAC(true));
+      const res = await API.register(payload);
+
+      dispatch(authRegister(res.data));
+    } catch (e: any) {
+      dispatch(isErrorAC(true));
+
+      console.log("error", e.response.data);
     } finally {
       dispatch(isLoadingAC(false));
     }

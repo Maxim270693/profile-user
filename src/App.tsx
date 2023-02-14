@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Main } from "./feature/Main";
 import { Login } from "./feature/Login";
 import { Header } from "./feature/Header";
+import { Register } from "./feature/Register";
 import { ListAccounts } from "./feature/ListAccounts";
 import { CurrentAccount } from "./feature/CurrentAccount";
 
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path={"/"} element={<Main />} />
         <Route path={"/login"} element={<Login />} />
+        <Route path={"/register"} element={<Register />} />
         <Route path={"/list-accounts"} element={<ListAccounts />} />
         <Route
           path={"/list-accounts/:accountId"}
