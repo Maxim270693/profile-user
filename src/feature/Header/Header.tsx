@@ -1,10 +1,11 @@
-import { useAppSelector, UserResponse } from "../../types/types";
+import { NavLink } from "react-router-dom";
 
 import logo from "../../image/logo.svg";
 
 import { Button } from "../../components/Button";
 import { Characters } from "../../components/Characters";
 
+import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Header.module.scss";
 
 export const Header = () => {
@@ -16,7 +17,9 @@ export const Header = () => {
     <div className={style.wrapper}>
       <div className={style.logoBlock}>
         <div className={style.image}>
-          <img src={logo} alt="logo" />
+          <NavLink to={"/"}>
+            <img src={logo} alt="logo" />
+          </NavLink>
         </div>
 
         <div className={style.text}>

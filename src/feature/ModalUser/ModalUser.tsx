@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useInputState } from "../../utils/utils";
+import { isErrorAC } from "../../bll/actions/commonActions/actions";
 import { addAccountTC, updateCurrentUserTC } from "../../bll/thunks/thunks";
 
 import { Modal } from "../../components/Modal";
@@ -7,7 +8,11 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
 import style from "./ModalUser.module.scss";
-import { AccountUsersType, RenderTitleType } from "../../types/types";
+import {
+  AccountUsersType,
+  RenderTitleType,
+  useAppSelector,
+} from "../../types/types";
 
 interface IModalUser {
   isEdit: boolean;
@@ -23,6 +28,10 @@ export const ModalUser = ({
   type,
 }: IModalUser) => {
   const dispatch = useDispatch();
+
+  const isError = useAppSelector<boolean | null>(
+    (state) => state.common.isError
+  );
 
   const [editFirstName, onChangeFirstNameHandler] = useInputState(
     type !== "add" ? currentUser?.name.firstname : "",
@@ -41,6 +50,11 @@ export const ModalUser = ({
     true
   );
 
+  const onCloseHandler = () => {
+    setIsEdit(false);
+    dispatch(isErrorAC(false));
+  };
+
   const onSaveHandler = () => {
     const payload = {
       ...currentUser,
@@ -54,15 +68,27 @@ export const ModalUser = ({
         city: editCity,
       },
     };
-    dispatch(
-      // @ts-ignore
-      type === "edit"
-        ? // @ts-ignore
-          updateCurrentUserTC(currentUser.id, payload)
-        : // @ts-ignore
-          addAccountTC(payload)
-    );
-    setIsEdit(false);
+
+    if (
+      editFirstName === "" ||
+      editLastName === "" ||
+      editEmail === "" ||
+      editCity === ""
+    ) {
+      return dispatch(isErrorAC(true));
+    } else {
+      dispatch(isErrorAC(false));
+      dispatch(
+        // @ts-ignore
+        type === "edit"
+          ? // @ts-ignore
+            updateCurrentUserTC(currentUser.id, payload)
+          : // @ts-ignore
+            addAccountTC(payload)
+      );
+
+      setIsEdit(false);
+    }
   };
 
   const renderTitle = (type: string) => {
@@ -130,8 +156,14 @@ export const ModalUser = ({
           />
         </div>
 
+        {isError ? (
+          <div className={style.error}>Все поля должны быть заполнены</div>
+        ) : (
+          ""
+        )}
+
         <div className={style.btns}>
-          <Button className={style.btn} onClick={() => setIsEdit(false)}>
+          <Button className={style.btn} onClick={onCloseHandler}>
             Отмена
           </Button>
           <Button className={style.btnSave} onClick={onSaveHandler}>
