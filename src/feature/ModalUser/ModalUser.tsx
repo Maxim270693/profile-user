@@ -157,7 +157,7 @@ export const ModalUser = ({
         </div>
 
         {isError ? (
-          <div className={style.error}>Все поля должны быть заполнены</div>
+          <div className="errorMessage">Все поля должны быть заполнены</div>
         ) : (
           ""
         )}

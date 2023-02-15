@@ -3,7 +3,7 @@ import {
   InitialStateRegisterType,
   RegisterResponseType,
 } from "../../types/types";
-import { AUTH_REGISTER } from "../../constants/constants";
+import { AUTH_REGISTER, ERRORS_MESSAGE } from "../../constants/constants";
 
 export const initialStateRegister = {
   isRegister: {} as RegisterResponseType,

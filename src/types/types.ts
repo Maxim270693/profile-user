@@ -2,7 +2,11 @@ import { rootReducer } from "../bll/store/store";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { initialStateCommon } from "../bll/reducers/commonReducer";
 import { initialStateLogin } from "../bll/reducers/loginReducer";
-import { isErrorAC, isLoadingAC } from "../bll/actions/commonActions/actions";
+import {
+  errorsMessage,
+  isErrorAC,
+  isLoadingAC,
+} from "../bll/actions/commonActions/actions";
 import {
   authLogin,
   authRegister,
@@ -48,10 +52,14 @@ export type InitialStateLoginType = typeof initialStateLogin;
 export type InitialStateRegisterType = typeof initialStateRegister;
 
 // type ActionsCommon
-export type ActionTypeCommon = IsLoadingActionType | IsErrorActionType;
+export type ActionTypeCommon =
+  | IsLoadingActionType
+  | IsErrorActionType
+  | errorsMessageActionType;
 
 export type IsLoadingActionType = ReturnType<typeof isLoadingAC>;
 export type IsErrorActionType = ReturnType<typeof isErrorAC>;
+export type errorsMessageActionType = ReturnType<typeof errorsMessage>;
 
 // type ActionsLogin
 export type ActionTypeLogin =

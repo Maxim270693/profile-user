@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { isErrorAC } from "../bll/actions/commonActions/actions";
+import { errorsMessage, isErrorAC } from "../bll/actions/commonActions/actions";
 import { useAppSelector, UserResponse } from "../types/types";
 
 export const useInputState = (value?: string, shouldUpdate?: true) => {
@@ -11,6 +11,7 @@ export const useInputState = (value?: string, shouldUpdate?: true) => {
   const onChange = (event: ChangeEvent<HTMLInputElement> | string) => {
     setState(typeof event === "string" ? event : event.target.value);
     dispatch(isErrorAC(false));
+    dispatch(errorsMessage([]));
   };
 
   useEffect(() => {

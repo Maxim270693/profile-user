@@ -9,7 +9,11 @@ import {
   getCurrentUserAC,
   updateCurrentUserAC,
 } from "../actions/accountActions/accountActions";
-import { isErrorAC, isLoadingAC } from "../actions/commonActions/actions";
+import {
+  errorsMessage,
+  isErrorAC,
+  isLoadingAC,
+} from "../actions/commonActions/actions";
 
 import {
   AccountUsersType,
@@ -35,6 +39,7 @@ export const authLoginTC =
 
       console.log("error", e.response.data);
       alert(e.response.data.message);
+      dispatch(errorsMessage(e.response.data.errors));
     } finally {
       dispatch(isLoadingAC(false));
     }
@@ -51,6 +56,7 @@ export const authRegisterTC =
       dispatch(isErrorAC(true));
 
       console.log("error", e.response.data);
+      dispatch(errorsMessage(e.response.data.errors));
     } finally {
       dispatch(isLoadingAC(false));
     }

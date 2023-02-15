@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import logo from "../../image/logo.svg";
 
@@ -7,8 +8,11 @@ import { Characters } from "../../components/Characters";
 
 import { useAppSelector, UserResponse } from "../../types/types";
 import style from "./Header.module.scss";
+import { errorsMessage } from "../../bll/actions/commonActions/actions";
 
 export const Header = () => {
+  const dispatch = useDispatch();
+
   const loginUser = useAppSelector<UserResponse | null>(
     (state) => state.login.loginUser
   );
@@ -17,7 +21,7 @@ export const Header = () => {
     <div className={style.wrapper}>
       <div className={style.logoBlock}>
         <div className={style.image}>
-          <NavLink to={"/"}>
+          <NavLink to={"/"} onClick={() => dispatch(errorsMessage([]))}>
             <img src={logo} alt="logo" />
           </NavLink>
         </div>

@@ -19,6 +19,9 @@ export const Register = () => {
   const isRegister = useAppSelector<RegisterResponseType>(
     (state) => state.register.isRegister
   );
+  const errorsMessage = useAppSelector<string[]>(
+    (state) => state.common.errorsMessage
+  );
 
   const [name, onChangeNameHandler] = useInputState("");
   const [email, onChangeEmailHandler] = useInputState("");
@@ -30,6 +33,24 @@ export const Register = () => {
   if (isRegister.status === 200) {
     return <Navigate replace to="/login" />;
   }
+
+  const renderErrorMessage = (type: string) => {
+    return (
+      !!errorsMessage.length && (
+        <div>
+          {errorsMessage.map((err, index) => {
+            if (err.split(" ")[1] === type) {
+              return (
+                <div key={index} className="errorMessage">
+                  {err}
+                </div>
+              );
+            }
+          })}
+        </div>
+      )
+    );
+  };
 
   return (
     <div className={style.wrapper}>
@@ -46,12 +67,15 @@ export const Register = () => {
         >
           <Input
             type="text"
-            placeholder="name"
+            placeholder="Name"
             value={name ? name : ""}
             name="name"
             onChange={onChangeNameHandler}
             image={UserIcon}
           />
+
+          {renderErrorMessage("name")}
+
           <Input
             type="text"
             placeholder="Email"
@@ -60,30 +84,43 @@ export const Register = () => {
             onChange={onChangeEmailHandler}
             image={EmailIcon}
           />
+
+          {renderErrorMessage("email")}
+
           <Input
             type="text"
-            placeholder="phone"
+            placeholder="Phone"
             value={phone ? phone : ""}
             name="phone"
             onChange={onChangePhoneHandler}
             image={PhoneIcon}
           />
+
+          {renderErrorMessage("phone")}
+
           <Input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             value={password ? password : ""}
             name="password"
             onChange={onChangePasswordHandler}
             image={PasswordIcon}
+            eyeIcon={true}
           />
+
+          {renderErrorMessage("password")}
+
           <Input
             type="password"
-            placeholder="password_confirmation"
+            placeholder="Password Confirmation"
             value={passwordConfirmation ? passwordConfirmation : ""}
             name="passwordConfirmation"
             onChange={onChangePasswordConfirmationHandler}
             image={PasswordIcon}
+            eyeIcon={true}
           />
+
+          {renderErrorMessage("password confirmation")}
         </Form>
       )}
     </div>

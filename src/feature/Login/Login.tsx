@@ -12,7 +12,7 @@ import { Form } from "../Form";
 import { Footer } from "../Footer";
 import { Spinner } from "../../components/Spinner";
 
-import UserIcon from "../../image/user.svg";
+import EmailIcon from "../../image/email.svg";
 import PasswordIcon from "../../image/password.svg";
 
 import { useAppSelector, UserResponse } from "../../types/types";
@@ -25,6 +25,10 @@ export const Login = () => {
   const isError = useAppSelector<boolean | null>(
     (state) => state.common.isError
   );
+  const errorsMessage = useAppSelector<string[]>(
+    (state) => state.common.errorsMessage
+  );
+
   const loginUser = useAppSelector<UserResponse | null>(
     (state) => state.login.loginUser
   );
@@ -46,6 +50,24 @@ export const Login = () => {
     }
   }, [loginUser]);
 
+  const renderErrorMessage = (type: string) => {
+    return (
+      !!errorsMessage.length && (
+        <div>
+          {errorsMessage.map((err, index) => {
+            if (err.split(" ")[1] === type) {
+              return (
+                <div key={index} className="errorMessage">
+                  {err}
+                </div>
+              );
+            }
+          })}
+        </div>
+      )
+    );
+  };
+
   return (
     <div>
       <div className={style.wrapper}>
@@ -59,10 +81,10 @@ export const Login = () => {
               value={email}
               name="email"
               onChange={onChangeEmailHandler}
-              image={UserIcon}
+              image={EmailIcon}
             />
 
-            {/*{isError && isError}*/}
+            {renderErrorMessage("email")}
 
             <Input
               type="password"
@@ -74,6 +96,8 @@ export const Login = () => {
               eyeIcon={true}
               eyeCloseIcon={true}
             />
+
+            {renderErrorMessage("password")}
           </Form>
         )}
       </div>
