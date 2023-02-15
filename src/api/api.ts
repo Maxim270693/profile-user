@@ -8,39 +8,34 @@ import {
   UserResponse,
 } from "../types/types";
 
+const authInstance = axios.create({
+  baseURL: "https://apingweb.com/api/",
+});
+
+const instance = axios.create({
+  baseURL: "https://fakestoreapi.com/",
+});
+
 export const API = {
   login(payload: UserLoginType) {
-    return axios.post<UserResponse>("https://apingweb.com/api/login", payload);
+    return authInstance.post<UserResponse>("login", payload);
   },
   register(payload: RegisterType) {
-    return axios.post<RegisterResponseType>(
-      "https://apingweb.com/api/register",
-      payload
-    );
+    return authInstance.post<RegisterResponseType>("register", payload);
   },
   getAccounts() {
-    return axios.get<AccountUsersType[]>("https://fakestoreapi.com/users");
+    return instance.get<AccountUsersType[]>("users");
   },
   getCurrentUser(userId: number) {
-    return axios.get<AccountUsersType>(
-      `https://fakestoreapi.com/users/${userId}`
-    );
+    return instance.get<AccountUsersType>(`users/${userId}`);
   },
   deleteAccount(userId: number) {
-    return axios.delete<AccountUsersType>(
-      `https://fakestoreapi.com/users/${userId}`
-    );
+    return instance.delete<AccountUsersType>(`users/${userId}`);
   },
   updateCurrentAccount(userId: number, payload: AccountUsersType) {
-    return axios.put<AccountUsersType>(
-      `https://fakestoreapi.com/users/${userId}`,
-      payload
-    );
+    return instance.put<AccountUsersType>(`users/${userId}`, payload);
   },
   addAccount(payload: AddAccountType) {
-    return axios.post<AccountUsersType>(
-      "https://fakestoreapi.com/users",
-      payload
-    );
+    return instance.post<AccountUsersType>("users", payload);
   },
 };

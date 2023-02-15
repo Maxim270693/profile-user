@@ -6,6 +6,7 @@ import {
   emailLogin,
   passwordLogin,
 } from "../../bll/actions/authActions/authActions";
+import { errorsMessage } from "../../bll/actions/commonActions/actions";
 
 import { Input } from "../../components/Input";
 import { Form } from "../Form";
@@ -25,7 +26,7 @@ export const Login = () => {
   const isError = useAppSelector<boolean | null>(
     (state) => state.common.isError
   );
-  const errorsMessage = useAppSelector<string[]>(
+  const errorsMessageState = useAppSelector<string[]>(
     (state) => state.common.errorsMessage
   );
 
@@ -39,9 +40,11 @@ export const Login = () => {
 
   const onChangeEmailHandler = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(emailLogin(event.target.value));
+    dispatch(errorsMessage([]));
   };
   const onChangePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(passwordLogin(event.target.value));
+    dispatch(errorsMessage([]));
   };
 
   useEffect(() => {
@@ -52,9 +55,9 @@ export const Login = () => {
 
   const renderErrorMessage = (type: string) => {
     return (
-      !!errorsMessage.length && (
+      !!errorsMessageState.length && (
         <div>
-          {errorsMessage.map((err, index) => {
+          {errorsMessageState.map((err, index) => {
             if (err.split(" ")[1] === type) {
               return (
                 <div key={index} className="errorMessage">
