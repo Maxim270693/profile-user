@@ -6,16 +6,35 @@
     width: 800px;
     margin: 50px 0 100px 0;
 
+    @media screen and (max-width: 850px) {
+      width: 100%;
+      margin: 50px 50px 100px 50px;
+    }
+
     .titleBlock {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+
+      @media screen and (max-width: 830px) {
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
 
       .title {
         font-weight: 500;
         font-size: 30px;
         line-height: 140%;
         margin-bottom: 30px;
+      }
+
+      .btnsBlock {
+        display: flex;
+        gap: 10px;
+
+        @media screen and (max-width: 535px) {
+          flex-direction: column;
+        }
       }
     }
 

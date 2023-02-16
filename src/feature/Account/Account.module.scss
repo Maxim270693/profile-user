@@ -27,9 +27,28 @@
       background-color: #E6E6E6;
       cursor: pointer;
     }
+
+    .email {
+      @media screen and (max-width: 650px){
+        display: none;
+      }
+    }
+  }
+
+  .btnDeleteMobile {
+    img {
+      width: 30px;
+    }
+    @media screen and (min-width: 550px){
+      display: none;
+    }
   }
 
   .btn {
     margin-left: 20px;
+
+    @media screen and (max-width: 550px){
+      display: none;
+    }
   }
 }

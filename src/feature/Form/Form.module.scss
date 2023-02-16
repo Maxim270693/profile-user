@@ -10,6 +10,10 @@
       font-size: 30px;
       line-height: 140%;
       margin-bottom: 25px;
+
+      @media screen and (max-width: 400px) {
+        font-size: 26px;
+      }
     }
 
     .createAccount {

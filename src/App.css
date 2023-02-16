@@ -11,6 +11,10 @@ a {
     text-decoration: none;
 }
 
+img {
+    cursor: pointer;
+}
+
 .App {
     display: flex;
     flex-direction: column;

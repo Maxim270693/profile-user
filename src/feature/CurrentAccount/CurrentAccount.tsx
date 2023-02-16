@@ -45,7 +45,7 @@ export const CurrentAccount = () => {
 
         <div className={style.aboutBlock}>
           <div className={style.aboutItem}>
-            <div>
+            <div className={style.itemBlock}>
               <div className={style.item}>
                 <div className={style.itemTitle}>Email:</div>
                 <div>{currentUser?.email}</div>

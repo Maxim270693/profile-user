@@ -7,6 +7,7 @@ import { Characters } from "../../components/Characters";
 import { ButtonWithIcon } from "../../components/ButtonWithIcon";
 
 import deleteIcon from "../../image/deleteIcon.svg";
+import deleteMobileIcon from "../../image/deleteMobile.svg";
 
 import { AccountUsersType } from "../../types/types";
 import style from "./Account.module.scss";
@@ -43,9 +44,13 @@ export const Account = ({ account }: IAccountProps) => {
             <div>{fullName}</div>
           </div>
 
-          <div>{account.email}</div>
+          <div className={style.email}>{account.email}</div>
         </div>
       </NavLink>
+
+      <div className={style.btnDeleteMobile}>
+        <img src={deleteMobileIcon} alt="deleteMobileIcon" />
+      </div>
 
       <ButtonWithIcon
         img={deleteIcon}

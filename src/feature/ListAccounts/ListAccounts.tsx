@@ -58,14 +58,16 @@ export const ListAccounts = () => {
             type="add"
           />
 
-          <Button onClick={onShowAddModal}>Добавить аккаунт</Button>
+          <div className={style.btnsBlock}>
+            <Button onClick={onShowAddModal}>Добавить аккаунт</Button>
 
-          <ButtonWithIcon
-            alt="ArrowBack"
-            img={ArrowBack}
-            onClick={goBackHandler}
-            title="Вернуться назад"
-          />
+            <ButtonWithIcon
+              alt="ArrowBack"
+              img={ArrowBack}
+              onClick={goBackHandler}
+              title="Вернуться назад"
+            />
+          </div>
         </div>
 
         {isLoading ? (

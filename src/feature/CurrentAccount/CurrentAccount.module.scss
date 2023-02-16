@@ -11,6 +11,11 @@
       margin: 0 auto;
       padding-top: 50px;
 
+      @media screen and (max-width: 800px) {
+        flex-direction: column;
+        width: 100%;
+      }
+
       .avatarBlock {
         padding: 20px;
         display: flex;
@@ -39,6 +44,16 @@
           display: flex;
           justify-content: space-between;
           border-bottom: 2px solid #E6E6E6;
+
+          @media screen and (max-width: 500px) {
+            flex-direction: column-reverse;
+          }
+
+          .itemBlock {
+            @media screen and (max-width: 500px) {
+              margin-top: 15px;
+            }
+          }
         }
 
         .item {

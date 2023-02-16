@@ -28,6 +28,10 @@
       padding: 12px 20px;
       color: #838383;
       background: #F3F3F3;
+
+      @media screen and (max-width: 500px) {
+        display: none;
+      }
     }
 
     .inputEmail {
@@ -35,12 +39,21 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       padding: 12px 20px;
+
+      @media screen and (max-width: 500px) {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
     }
   }
 
   .btns {
     display: flex;
     gap: 10px;
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+    }
 
     .btn, .btnSave {
       width: 100%;
