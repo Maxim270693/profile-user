@@ -11,7 +11,6 @@ import {
 const authInstance = axios.create({
   baseURL: "https://apingweb.com/api/",
 });
-
 const instance = axios.create({
   baseURL: "https://fakestoreapi.com/",
 });
